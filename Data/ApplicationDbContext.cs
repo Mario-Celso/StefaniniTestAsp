@@ -11,7 +11,6 @@ namespace StefaniniTestAsp.Data
         {
         }
 
-        // Defina suas entidades DbSet aqui
         public DbSet<Athlete> Athletes { get; set; }
 
         public override int SaveChanges()
