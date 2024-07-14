@@ -2,6 +2,12 @@
 @model CreateModel
 @{
     ViewData["Title"] = "Inserir Atleta";
+
+    var positions = new List<string> {
+        "Goleiro", "Lateral Direito", "Zagueiro", "Lateral Esquerdo",
+        "Volante", "Meio-campista", "Ponta Direita", "Ponta Esquerda",
+        "Atacante", "Centroavante", "Técnico"
+    };
 }
 
 <h1>Inserir Novo Atleta</h1>
@@ -48,18 +54,10 @@
             <div class="form-group">
                 <label for="Position">Posição</label>
                 <select class="form-control" id="Position" name="Position" required>
-                    <option value="">Selecione a posição</option>
-                    <option value="Goleiro">Goleiro</option>
-                    <option value="Lateral Direito">Lateral Direito</option>
-                    <option value="Zagueiro">Zagueiro</option>
-                    <option value="Lateral Esquerdo">Lateral Esquerdo</option>
-                    <option value="Volante">Volante</option>
-                    <option value="Meio-campista">Meio-campista</option>
-                    <option value="Ponta Direita">Ponta Direita</option>
-                    <option value="Ponta Esquerda">Ponta Esquerda</option>
-                    <option value="Atacante">Atacante</option>
-                    <option value="Centroavante">Centroavante</option>
-                    <option value="Técnico">Técnico</option>
+                    @foreach (var position in positions)
+                    {
+                        <option value="@position" >@position</option>
+                    }
                 </select>
                 <span asp-validation-for="Athlete.Position" class="text-danger"></span>
             </div>
