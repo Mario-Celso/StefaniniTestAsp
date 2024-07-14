@@ -2,6 +2,14 @@
 @model EditModel
 @{
     ViewData["Title"] = "Editar Atleta";
+
+    var positions = new List<string> {
+        "Goleiro", "Lateral Direito", "Zagueiro", "Lateral Esquerdo",
+        "Volante", "Meio-campista", "Ponta Direita", "Ponta Esquerda",
+        "Atacante", "Centroavante", "Técnico"
+    };
+
+    var selectedPosition = Model.Athlete.Position;
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -55,17 +63,10 @@
             <div class="form-group">
                 <label asp-for="Athlete.Position" class="control-label">Posição</label>
                 <select asp-for="Athlete.Position" class="form-control" required>
-                    <option value="Goleiro" selected="@(Model.Athlete.Position == "Goleiro" ? "selected" : "")">Goleiro</option>
-                    <option value="Lateral Direito" selected="@(Model.Athlete.Position == "Lateral Direito" ? "selected" : "")">Lateral Direito</option>
-                    <option value="Zagueiro" selected="@(Model.Athlete.Position == "Zagueiro" ? "selected" : "")">Zagueiro</option>
-                    <option value="Lateral Esquerdo" selected="@(Model.Athlete.Position == "Lateral Esquerdo" ? "selected" : "")">Lateral Esquerdo</option>
-                    <option value="Volante" selected="@(Model.Athlete.Position == "Volante" ? "selected" : "")">Volante</option>
-                    <option value="Meio-campista" selected="@(Model.Athlete.Position == "Meio-campista" ? "selected" : "")">Meio-campista</option>
-                    <option value="Ponta Direita" selected="@(Model.Athlete.Position == "Ponta Direita" ? "selected" : "")">Ponta Direita</option>
-                    <option value="Ponta Esquerda" selected="@(Model.Athlete.Position == "Ponta Esquerda" ? "selected" : "")">Ponta Esquerda</option>
-                    <option value="Atacante" selected="@(Model.Athlete.Position == "Atacante" ? "selected" : "")">Atacante</option>
-                    <option value="Centroavante" selected="@(Model.Athlete.Position == "Centroavante" ? "selected" : "")">Centroavante</option>
-                    <option value="Técnico" selected="@(Model.Athlete.Position == "Técnico" ? "selected" : "")">Técnico</option>
+                    @foreach (var position in positions)
+                    {
+                        <option value="@position" selected="@(position == selectedPosition ? "selected" : null)">@position</option>
+                    }
                 </select>
                 <span asp-validation-for="Athlete.Position" class="text-danger"></span>
             </div>
@@ -86,4 +87,3 @@
         </div>
     </div>
 </form>
-
