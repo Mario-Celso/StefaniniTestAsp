@@ -1,0 +1,89 @@
+﻿@page
+@model EditModel
+@{
+    ViewData["Title"] = "Editar Atleta";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" class="mt-4">
+
+    <input type="hidden" asp-for="Athlete.Id" />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Athlete.FullName" class="control-label">Nome Completo</label>
+                <input asp-for="Athlete.FullName" class="form-control" />
+                <span asp-validation-for="Athlete.FullName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Athlete.Nickname" class="control-label">Apelido</label>
+                <input asp-for="Athlete.Nickname" class="form-control" />
+                <span asp-validation-for="Athlete.Nickname" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Athlete.BirthDate" class="control-label">Data de Nascimento</label>
+                <input asp-for="Athlete.BirthDate" class="form-control" type="date" />
+                <span asp-validation-for="Athlete.BirthDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Athlete.Height" class="control-label">Altura</label>
+                <input asp-for="Athlete.Height" class="form-control" />
+                <span asp-validation-for="Athlete.Height" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Athlete.Weight" class="control-label">Peso</label>
+                <input asp-for="Athlete.Weight" class="form-control" />
+                <span asp-validation-for="Athlete.Weight" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Athlete.Position" class="control-label">Posição</label>
+                <select asp-for="Athlete.Position" class="form-control" required>
+                    <option value="Goleiro" selected="@(Model.Athlete.Position == "Goleiro" ? "selected" : "")">Goleiro</option>
+                    <option value="Lateral Direito" selected="@(Model.Athlete.Position == "Lateral Direito" ? "selected" : "")">Lateral Direito</option>
+                    <option value="Zagueiro" selected="@(Model.Athlete.Position == "Zagueiro" ? "selected" : "")">Zagueiro</option>
+                    <option value="Lateral Esquerdo" selected="@(Model.Athlete.Position == "Lateral Esquerdo" ? "selected" : "")">Lateral Esquerdo</option>
+                    <option value="Volante" selected="@(Model.Athlete.Position == "Volante" ? "selected" : "")">Volante</option>
+                    <option value="Meio-campista" selected="@(Model.Athlete.Position == "Meio-campista" ? "selected" : "")">Meio-campista</option>
+                    <option value="Ponta Direita" selected="@(Model.Athlete.Position == "Ponta Direita" ? "selected" : "")">Ponta Direita</option>
+                    <option value="Ponta Esquerda" selected="@(Model.Athlete.Position == "Ponta Esquerda" ? "selected" : "")">Ponta Esquerda</option>
+                    <option value="Atacante" selected="@(Model.Athlete.Position == "Atacante" ? "selected" : "")">Atacante</option>
+                    <option value="Centroavante" selected="@(Model.Athlete.Position == "Centroavante" ? "selected" : "")">Centroavante</option>
+                    <option value="Técnico" selected="@(Model.Athlete.Position == "Técnico" ? "selected" : "")">Técnico</option>
+                </select>
+                <span asp-validation-for="Athlete.Position" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Athlete.ShirtNumber" class="control-label">Número da Camisa</label>
+                <input asp-for="Athlete.ShirtNumber" class="form-control" />
+                <span asp-validation-for="Athlete.ShirtNumber" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary me-2">Salvar</button>
+            <a asp-page="/Index" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+

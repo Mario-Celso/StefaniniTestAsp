@@ -1,0 +1,109 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    var numberFilter = Request.Query["numberFilter"].ToString();
+    var nicknameFilter = Request.Query["nicknameFilter"].ToString();
+    var imcFilter = Request.Query["imcFilter"].ToString();
+}
+
+<div>
+    <h1>Controle de Atletas</h1>
+
+    <div class="d-flex align-items-end mb-3">
+        <div class="me-2">
+            <label for="txtNumberFilter" class="form-label">Número da Camisa:</label>
+            <input type="text" id="txtNumberFilter" class="form-control" value="@numberFilter" />
+        </div>
+        <div class="me-2">
+            <label for="txtNicknameFilter" class="form-label">Apelido:</label>
+            <input type="text" id="txtNicknameFilter" class="form-control" value="@nicknameFilter" />
+        </div>
+        <div class="me-2">
+            <label for="ddlIMCFilter" class="form-label">Classificação do IMC:</label>
+            <select id="ddlIMCFilter" class="form-select">
+                <option value="">Todos</option>
+                    <option value="Abaixo do Peso" selected="@(imcFilter == "Abaixo do Peso" ? "selected" : "")">Abaixo do Peso</option>
+                    <option value="Peso Normal" selected="@(imcFilter == "Peso Normal" ? "selected" : "")">Peso Normal</option>
+                    <option value="Sobrepeso" selected="@(imcFilter == "Sobrepeso" ? "selected" : "")">Sobrepeso</option>
+                    <option value="Obesidade Grau I" selected="@(imcFilter == "Obesidade Grau I" ? "selected" : "")">Obesidade Grau I</option>
+                    <option value="Obesidade Grau II" selected="@(imcFilter == "Obesidade Grau II" ? "selected" : "")">Obesidade Grau II</option>
+                    <option value="Obesidade Grau III" selected="@(imcFilter == "Obesidade Grau III" ? "selected" : "")">Obesidade Grau III</option>
+            </select>
+        </div>
+        <div class="d-flex align-items-end">
+            <button class="btn btn-primary me-2" id="btnSearch">Buscar</button>
+            <a asp-page="/Create" class="btn btn-primary">Inserir Novo Atleta</a>
+        </div>
+    </div>
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Número da Camisa</th>
+                <th>Apelido</th>
+                <th>Posição</th>
+                <th>Idade</th>
+                <th>Altura</th>
+                <th>Peso</th>
+                <th>IMC</th>
+                <th>Classificação do IMC</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var athlete in Model.Athletes)
+            {
+                <tr class="@((athlete.IMC > 25) ? "high-imc" : "")">
+                    <td>@athlete.ShirtNumber</td>
+                    <td>@athlete.Nickname</td>
+                    <td>@athlete.Position</td>
+                    <td>@athlete.Age</td>
+                    <td>@athlete.Height</td>
+                    <td>@athlete.Weight</td>
+                    <td>@athlete.IMC.ToString("F2").Replace('.', ',')</td>
+                    <td>@athlete.IMCClassification</td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@athlete.Id" class="btn btn-sm btn-primary">Editar</a>
+                        <a asp-page-handler="Delete" asp-route-id="@athlete.Id" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Obter valores dos filtros da URL
+            var numberFilter = '@numberFilter';
+            var nicknameFilter = '@nicknameFilter';
+            var imcFilter = '@imcFilter';
+
+            // Definir valores nos campos de filtro
+            $('#txtNumberFilter').val(numberFilter);
+            $('#txtNicknameFilter').val(nicknameFilter);
+            $('#ddlIMCFilter').val(imcFilter);
+
+            // Ação do botão de busca
+            $('#btnSearch').click(function () {
+                var numberFilter = $('#txtNumberFilter').val();
+                var nicknameFilter = $('#txtNicknameFilter').val();
+                var imcFilter = $('#ddlIMCFilter').val();
+
+                // Montar a URL com os parâmetros de filtro
+                var url = `?numberFilter=${numberFilter}&nicknameFilter=${nicknameFilter}&imcFilter=${imcFilter}`;
+
+                // Redirecionar para a página com os parâmetros de filtro
+                window.location.href = url;
+            });
+        });
+    </script>
+}
+
+<style>
+    .high-imc {
+        background-color: #ffe6e6; /* Cor de fundo para destacar */
+    }
+</style>

@@ -1,0 +1,83 @@
+﻿@page
+@model CreateModel
+@{
+    ViewData["Title"] = "Inserir Atleta";
+}
+
+<h1>Inserir Novo Atleta</h1>
+
+<form method="post" class="mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="FullName">Nome Completo</label>
+                <input type="text" class="form-control" id="FullName" name="FullName" required />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Nickname">Apelido</label>
+                <input type="text" class="form-control" id="Nickname" name="Nickname" required />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="BirthDate">Data de Nascimento</label>
+                <input type="date" class="form-control" id="BirthDate" name="BirthDate" required />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="Height">Altura (em centímetros)</label>
+                <input type="number" step="0.01" class="form-control" id="Height" name="Height" required />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="Weight">Peso (em kg)</label>
+                <input type="number" step="0.1" class="form-control" id="Weight" name="Weight" required />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Position">Posição</label>
+                <select class="form-control" id="Position" name="Position" required>
+                    <option value="">Selecione a posição</option>
+                    <option value="Goleiro">Goleiro</option>
+                    <option value="Lateral Direito">Lateral Direito</option>
+                    <option value="Zagueiro">Zagueiro</option>
+                    <option value="Lateral Esquerdo">Lateral Esquerdo</option>
+                    <option value="Volante">Volante</option>
+                    <option value="Meio-campista">Meio-campista</option>
+                    <option value="Ponta Direita">Ponta Direita</option>
+                    <option value="Ponta Esquerda">Ponta Esquerda</option>
+                    <option value="Atacante">Atacante</option>
+                    <option value="Centroavante">Centroavante</option>
+                    <option value="Técnico">Técnico</option>
+                </select>
+                <span asp-validation-for="Athlete.Position" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="ShirtNumber">Número da Camisa</label>
+                <input type="number" class="form-control" id="ShirtNumber" name="ShirtNumber" required />
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary me-2">Salvar</button>
+            <a asp-page="/Index" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+
